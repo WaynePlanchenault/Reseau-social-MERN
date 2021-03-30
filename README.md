@@ -6,3 +6,5 @@ npm i --save express nodemon dotenv // télécharge le microframwork express + n
 npm i -s mongoose // bibliothèque qui permet de travailler avec mongodb
 
 npm i -s validator // biblio pour demander des validations
+
+npm i -s body-parser // il semblerait que ce soit inutile depuis la version 4.16 d'express
