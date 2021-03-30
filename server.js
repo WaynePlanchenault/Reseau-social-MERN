@@ -1,5 +1,6 @@
 const express = require('express');
-require('dotenv').config({path: './config/.env'})
+require('dotenv').config({path: './config/.env'});
+require('./config/db');
 const app = express();
 
 // Permet d'utiliser le port stocké dans le fichier .env
