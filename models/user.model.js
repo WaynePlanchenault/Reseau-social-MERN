@@ -58,5 +58,17 @@ userSchema.pre("save", async function(next) {
     next(); // une fois que t'as fait ça passe à la suite
 })
 
-const UserModel = mongoose.model('user', userSchema)
+userSchema.statics.login = async function(email, password) { // on récupère email password et on compare le mdp crypté 
+    const user = await this.findOne({ email});
+    if (user) {
+        const auth = await bcrypt.compare(password, user.password);
+        if (auth) {
+            return user;
+        }
+        throw Error('incorrect password');
+    }
+    throw Error('incorrect email')
+};
+
+const UserModel = mongoose.model('user', userSchema);
 module.exports = UserModel; 

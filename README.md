@@ -10,3 +10,5 @@ npm i -s validator // biblio pour demander des validations
 npm i -s body-parser // il semblerait que ce soit inutile depuis la version 4.16 d'express
 
 npm i -s bcrypt // permet d'encrypter les MDP
+
+npm i -s jsonwebtoken // permet d'utiliser des token pour sécuriser la connexion utilisateur
