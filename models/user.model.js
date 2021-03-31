@@ -56,7 +56,7 @@ userSchema.pre("save", async function(next) {
     //bcrypt va nous générer uen série de caractères 
     this.password = await bcrypt.hash(this.password, salt);
     next(); // une fois que t'as fait ça passe à la suite
-})
+});
 
 userSchema.statics.login = async function(email, password) { // on récupère email password et on compare le mdp crypté 
     const user = await this.findOne({ email});
