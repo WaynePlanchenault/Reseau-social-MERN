@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema(
         pseudo: {
             type: String,
             required: true,
-            mingLength: 3,
+            minglength: 3,
             maxLength: 55,
             unique: true,
             trim: true //permet de supprimer les espaces à la fin
@@ -19,13 +19,14 @@ const userSchema = new mongoose.Schema(
             required: true,
             validate: [isEmail], //remplace la REGEX
             lowercase: true,
+            unique: true,
             trim: true,
         },
         password: {
             type: String,
             required: true,
             max: 1024, //comme le MDP est crypté il peut être très long 
-            minLength: 6
+            minlength: 6
         },
         picture: {
             type: String,
