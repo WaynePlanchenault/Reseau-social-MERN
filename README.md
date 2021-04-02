@@ -14,3 +14,6 @@ npm i -s bcrypt // permet d'encrypter les MDP
 npm i -s jsonwebtoken // permet d'utiliser des token pour sécuriser la connexion utilisateur
 
 npm i -s cookie-parser // permet de récupérer req.cookie
+
+npm i -s multer // gestion upload d'images
+npm i multer@2.0.0-rc.1 // version plus récente de multer
