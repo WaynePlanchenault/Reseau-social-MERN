@@ -1,6 +1,10 @@
 const PostModel = require("../models/post.model");
 const UserModel = require("../models/user.model");
 const ObjectID = require("mongoose").Types.ObjectId;
+const fs = require("fs");
+const { promisify } = require("util");
+const pipeline = promisify(require("stream").pipeline);
+const { uploadErrors } = require("../utils/errors.utils");
 
 module.exports.readPost = (req, res) => {
   PostModel.find((err, docs) => {
@@ -10,9 +14,39 @@ module.exports.readPost = (req, res) => {
 };
 
 module.exports.createPost = async (req, res) => {
+  let fileName;
+
+  if (req.file !== null) {
+    try {
+      if (
+        // on test le format de l'image
+        req.file.detectedMimeType !== "image/jpg" &&
+        req.file.detectedMimeType !== "image/png" &&
+        req.file.detectedMimeType !== "image/jpeg"
+      )
+        throw Error("invalid file");
+
+      if (req.file.size > 500000) throw Error("max size");
+      //on envoie une erreur si le fichier est trop volumineux
+    } catch (err) {
+      const errors = uploadErrors(err);
+      return res.status(201).json({ errors });
+    }
+    const fileName = req.body.posterId + Date.now() + ".jpg";
+
+    await pipeline(
+      req.file.stream,
+      fs.createWriteStream(
+        `${__dirname}/../client/public/uploads/posts/${fileName}` // dans ce chemin il va créer un fichier
+      )
+    );
+  }
+
   const newPost = new PostModel({
     posterId: req.body.posterId,
     message: req.body.message,
+    picture: req.file !== null ? "./uploads/posts/" + fileName : "",
+    //si c'est différent de null tu vas chercher l'image dans posts sinon tu renvois des string vide
     video: req.body.video,
     likers: [],
     comments: [],
