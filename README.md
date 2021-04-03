@@ -17,3 +17,5 @@ npm i -s cookie-parser // permet de récupérer req.cookie
 
 npm i -s multer // gestion upload d'images
 npm i multer@2.0.0-rc.1 // version plus récente de multer
+
+npm i -s cors // permet de gérer les autorisation de requêtes
