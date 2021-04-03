@@ -19,3 +19,9 @@ npm i -s multer // gestion upload d'images
 npm i multer@2.0.0-rc.1 // version plus récente de multer
 
 npm i -s cors // permet de gérer les autorisation de requêtes
+
+npx create-react-app client // créé et initialise la partie client react
+
+npm i -s node-sass // pour le style
+
+npm i -s react-router-dom // permet le routing côté client
