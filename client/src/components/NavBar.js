@@ -1,10 +1,13 @@
 import React, { useContext } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { UidContext } from "./AppContext";
 import Logout from "./Log/Logout";
 
 const NavBar = () => {
   const uid = useContext(UidContext);
+  const userData = useSelector((state) => state.userReducer);
+  // part récupérer le state dans le reducer userReducer et nous récupère les informations user
 
   return (
     <nav>
@@ -22,7 +25,7 @@ const NavBar = () => {
             <li></li>
             <li className="welcome">
               <NavLink exact to="/profil">
-                <h5>Bienvenue 'valeur dynamique'</h5>
+                <h5>Bienvenue {userData.pseudo} </h5>
               </NavLink>
             </li>
             <Logout />
