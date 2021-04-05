@@ -8,10 +8,12 @@ import React from "react";
 import Home from "../../pages/Home";
 import Profil from "../../pages/Profil";
 import Trending from "../../pages/Trending";
+import NavBar from "../NavBar";
 
 const index = () => {
   return (
     <Router>
+      <NavBar />
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/profil" exact component={Profil} />
