@@ -1,4 +1,4 @@
-import { GET_USER, UPLOAD_PICTURE } from "../actions/user.action";
+import { GET_USER, UPDATE_BIO, UPLOAD_PICTURE } from "../actions/user.action";
 
 const initialState = {};
 
@@ -10,6 +10,11 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state, //on récupère le state actuel, on ne l'écrase pas
         picture: action.payload,
+      };
+    case UPDATE_BIO:
+      return {
+        ...state,
+        bio: action.payload,
       };
     default:
       return state;
