@@ -27,6 +27,7 @@ const Card = ({ post }) => {
                 usersData
                   .map((user) => {
                     if (user._id === post.posterId) return user.picture;
+                    else return null;
                   })
                   .join("")
               }
@@ -40,6 +41,7 @@ const Card = ({ post }) => {
                   {!isEmpty(usersData[0]) &&
                     usersData.map((user) => {
                       if (user._id === post.posterId) return user.pseudo;
+                      else return null;
                     })}
                 </h3>
                 {post.posterId !== userData._id && (
@@ -55,7 +57,7 @@ const Card = ({ post }) => {
             {post.video && (
               <iframe
                 src={post.video}
-                frameborder="0"
+                frameBorder="0"
                 width="500"
                 height="300"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
