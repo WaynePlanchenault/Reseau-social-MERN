@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FollowHandler from "../Profil/FollowHandler";
-import { isEmpty } from "../Utils";
+import { isEmpty, timestampParser } from "../Utils";
 
 const CardComment = ({ post }) => {
   const [text, setText] = useState("");
@@ -48,7 +48,9 @@ const CardComment = ({ post }) => {
                     />
                   )}
                 </div>
+                <span>{timestampParser(comment.timestamp)} </span>
               </div>
+              <p>{comment.text}</p>
             </div>
           </div>
         );
