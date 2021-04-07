@@ -7,6 +7,7 @@ export const LIKE_POST = "LIKE_POST";
 export const UNLIKE_POST = "UNLIKE_POST";
 export const UPDATE_POST = "UPDATE_POST";
 export const DELETE_POST = "DELETE_POST";
+export const DELETE_COMMENT = "DELETE_COMMENT";
 
 // comments
 export const ADD_COMMENT = "ADD_COMMENT";
@@ -102,6 +103,20 @@ export const editComment = (postId, commentId, text) => {
     })
       .then((res) => {
         dispatch({ type: EDIT_COMMENT, payload: { postId, commentId, text } });
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+export const deleteComment = (postId, commentId) => {
+  return (dispatch) => {
+    return axios({
+      method: "patch",
+      url: `${process.env.REACT_APP_API_URL}api/post/delete-comment-post/${postId}`,
+      data: { commentId },
+    })
+      .then((res) => {
+        dispatch({ type: DELETE_COMMENT, payload: { postId, commentId } });
       })
       .catch((err) => console.log(err));
   };

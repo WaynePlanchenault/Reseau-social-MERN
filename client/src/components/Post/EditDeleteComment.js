@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { UidContext } from "../AppContext";
-import { editComment } from "../../actions/post.actions";
+import { deleteComment, editComment } from "../../actions/post.actions";
 
 const EditDeleteComment = ({ comment, postId }) => {
   const [isAuthor, setIsAuthor] = useState(false);
@@ -19,6 +19,8 @@ const EditDeleteComment = ({ comment, postId }) => {
       setEdit(false);
     }
   };
+
+  const handleDelete = () => dispatch(deleteComment(postId, comment._id));
 
   useEffect(() => {
     const checkAuthor = () => {
@@ -49,7 +51,18 @@ const EditDeleteComment = ({ comment, postId }) => {
             defaultValue={comment.text}
           />
           <br />
-          <input type="submit" value="valider modification" />
+          <div className="btn">
+            <span
+              onClick={() => {
+                if (window.confirm("Voulez-vous supprimer ce commentaire ?")) {
+                  handleDelete();
+                }
+              }}
+            >
+              <img src="./img/icons/trash.svg" alt="delete" />
+            </span>
+            <input type="submit" value="valider modification" />
+          </div>
         </form>
       )}
     </div>
