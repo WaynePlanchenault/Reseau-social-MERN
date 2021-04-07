@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FollowHandler from "../Profil/FollowHandler";
 import LikeButton from "./LikeButton";
 import { updatePost } from "../../actions/post.actions";
+import DeleteCard from "./DeleteCard";
 
 const Card = ({ post }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -94,6 +95,7 @@ const Card = ({ post }) => {
                 <div onClick={() => setIsUpdated(true)}>
                   <img src="./img/icons/edit.svg" alt="" />
                 </div>
+                <DeleteCard id={post._id} />
               </div>
             )}
             <div className="card-footer">
