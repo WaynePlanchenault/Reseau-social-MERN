@@ -18,7 +18,7 @@ export const getUser = (uid) => {
       .catch((err) => console.log(err));
   };
 };
-
+//
 export const uploadPicture = (data, id) => {
   return (dispatch) => {
     return axios
