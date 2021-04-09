@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { isEmpty } from "../Utils";
+import { isEmpty, timestampParser } from "../Utils";
 
 const NewPostForm = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -57,7 +57,34 @@ const NewPostForm = () => {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             ></textarea>
-
+            {message || postPicture || video.length > 20 ? (
+              <li className="card-container">
+                <div className="card-left">
+                  <img src={userData.picture} alt="user-pic" />
+                </div>
+                <div className="card-right">
+                  <div className="card-header">
+                    <div className="pseudo">
+                      <h3>{userData.pseudo}</h3>
+                    </div>
+                    <span>{timestampParser(Date.now())}</span>
+                  </div>
+                  <div className="content">
+                    <p>{message}</p>
+                    <img src={postPicture} alt="" />
+                    {video && (
+                      <iframe
+                        src={video}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        title={video}
+                      ></iframe>
+                    )}
+                  </div>
+                </div>
+              </li>
+            ) : null}
             <div className="footer-form">
               <div className="icon">
                 {isEmpty(video) && (
