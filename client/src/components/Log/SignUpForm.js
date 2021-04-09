@@ -104,6 +104,7 @@ const SignUpForm = () => {
           <div className="password error"></div>
           <br />
           <label htmlFor="password-conf">Confirmer le mot de passe</label>
+          <br />
           <input
             type="password"
             name="password"
