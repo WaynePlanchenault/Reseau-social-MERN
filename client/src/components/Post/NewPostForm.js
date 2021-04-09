@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { addPost, getPosts } from "../../actions/post.actions";
 import { isEmpty, timestampParser } from "../Utils";
 
 const NewPostForm = () => {
@@ -10,10 +11,29 @@ const NewPostForm = () => {
   const [video, setVideo] = useState("");
   const [file, setFile] = useState();
   const userData = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
 
-  const handlePicture = () => {};
+  const handlePost = async () => {
+    if (message || postPicture || video) {
+      const data = new FormData();
+      data.append("posterId", userData._id);
+      data.append("message", message);
+      if (file) data.append("file", file);
+      data.append("video", video);
 
-  const handlePost = () => {};
+      await dispatch(addPost(data));
+      dispatch(getPosts());
+      cancelPost();
+    } else {
+      alert("Veuillez entrer un message");
+    }
+  };
+
+  const handlePicture = (e) => {
+    setPostPicture(URL.createObjectURL(e.target.files[0]));
+    setFile(e.target.files[0]);
+    setVideo("");
+  };
 
   const cancelPost = () => {
     setMessage("");
@@ -22,27 +42,27 @@ const NewPostForm = () => {
     setFile("");
   };
 
-  const handleVideo = () => {
-    let findLink = message.split(" ");
-    // console.log(findLink); entre chaque espace .split coupe et créé un nouvel element dans le tableau
-    for (let i = 0; i < findLink.length; i++) {
-      if (
-        findLink[i].includes("https://www.yout") ||
-        findLink[i].includes("https://yout")
-      ) {
-        // si le lien contient cette partie ou l'autre
-        let embed = findLink[i].replace("watch?v=", "embed/");
-        // alors on prend le lien et on y remplace watch par embed
-        setVideo(embed.split("&")[0]);
-        findLink.splice(i, 1);
-        setMessage(findLink.join(" "));
-        setPostPicture("");
-      }
-    }
-  };
-
   useEffect(() => {
     if (!isEmpty(userData)) setIsLoading(false);
+
+    const handleVideo = () => {
+      let findLink = message.split(" ");
+      // console.log(findLink); entre chaque espace .split coupe et créé un nouvel element dans le tableau
+      for (let i = 0; i < findLink.length; i++) {
+        if (
+          findLink[i].includes("https://www.yout") ||
+          findLink[i].includes("https://yout")
+        ) {
+          // si le lien contient cette partie ou l'autre
+          let embed = findLink[i].replace("watch?v=", "embed/");
+          // alors on prend le lien et on y remplace watch par embed
+          setVideo(embed.split("&")[0]);
+          findLink.splice(i, 1);
+          setMessage(findLink.join(" "));
+          setPostPicture("");
+        }
+      }
+    };
     handleVideo();
   }, [userData, message, video]);
 
@@ -76,7 +96,7 @@ const NewPostForm = () => {
               placeholder="Quoi de neuf ?"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-            ></textarea>
+            />
             {message || postPicture || video.length > 20 ? (
               <li className="card-container">
                 <div className="card-left">

@@ -25,3 +25,18 @@ npx create-react-app client // créé et initialise la partie client react
 npm i -s node-sass // pour le style
 
 npm i -s react-router-dom // permet le routing côté client
+
+npm i -s axios // requêtes à la BDD
+
+npm i -s js-cookie // permet d'utiliser les cookie
+
+npm i -s react-redux // le redux de react bibliothèque js
+
+npm i -s
+react-redux // permet de gérer le store
+redux // Il vous aide à écrire des applications qui se comportent de manière cohérente et qui fonctionnent dans différents environnements (client, serveur et natif).
+redux-thunk // Redux Thunk est un middleware qui vous permet de faire un appel à l'action auprès des créateurs qui renvoie une fonction au lieu d'un objet d'action
+redux-logger // permet de travailler dans la console
+redux-devtools-extension // permet aussi de travailler dans la console et d'avoir plus d'informations
+
+npm i -s reactjs-popup // permet de gérer des popup
