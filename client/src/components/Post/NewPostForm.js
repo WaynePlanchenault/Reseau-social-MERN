@@ -22,9 +22,29 @@ const NewPostForm = () => {
     setFile("");
   };
 
+  const handleVideo = () => {
+    let findLink = message.split(" ");
+    // console.log(findLink); entre chaque espace .split coupe et créé un nouvel element dans le tableau
+    for (let i = 0; i < findLink.length; i++) {
+      if (
+        findLink[i].includes("https://www.yout") ||
+        findLink[i].includes("https://yout")
+      ) {
+        // si le lien contient cette partie ou l'autre
+        let embed = findLink[i].replace("watch?v=", "embed/");
+        // alors on prend le lien et on y remplace watch par embed
+        setVideo(embed.split("&")[0]);
+        findLink.splice(i, 1);
+        setMessage(findLink.join(" "));
+        setPostPicture("");
+      }
+    }
+  };
+
   useEffect(() => {
     if (!isEmpty(userData)) setIsLoading(false);
-  }, [userData]);
+    handleVideo();
+  }, [userData, message, video]);
 
   return (
     <div className="post-container">
