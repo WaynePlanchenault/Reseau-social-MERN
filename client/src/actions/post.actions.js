@@ -3,6 +3,7 @@ import axios from "axios";
 // posts
 
 export const GET_POSTS = "GET_POSTS";
+export const GET_ALL_POSTS = "GET_ALL_POSTS";
 export const ADD_POST = "ADD_POST";
 export const LIKE_POST = "LIKE_POST";
 export const UNLIKE_POST = "UNLIKE_POST";
@@ -24,6 +25,7 @@ export const getPosts = (num) => {
       .then((res) => {
         const array = res.data.slice(0, num); // permet de n'afficher qu'une certain nombre de posts
         dispatch({ type: GET_POSTS, payload: array });
+        dispatch({ type: GET_ALL_POSTS, payload: res.data });
       })
       .catch((err) => console.log(err));
   };

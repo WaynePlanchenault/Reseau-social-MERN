@@ -1,11 +1,11 @@
 import {
+  DELETE_COMMENT,
+  DELETE_POST,
+  EDIT_COMMENT,
   GET_POSTS,
   LIKE_POST,
   UNLIKE_POST,
   UPDATE_POST,
-  DELETE_POST,
-  EDIT_COMMENT,
-  DELETE_COMMENT,
 } from "../actions/post.actions";
 
 const initialState = {};
@@ -29,7 +29,7 @@ export default function postReducer(state = initialState, action) {
         if (post._id === action.payload.postId) {
           return {
             ...post,
-            likers: [post.likers.filter((id) => id !== action.payload.userId)],
+            likers: post.likers.filter((id) => id !== action.payload.userId),
           };
         }
         return post;
@@ -74,7 +74,6 @@ export default function postReducer(state = initialState, action) {
           };
         } else return post;
       });
-
     default:
       return state;
   }

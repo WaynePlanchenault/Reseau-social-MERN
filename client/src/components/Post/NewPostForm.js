@@ -32,6 +32,7 @@ const NewPostForm = () => {
 
   const handlePicture = (e) => {
     setPostPicture(URL.createObjectURL(e.target.files[0]));
+    console.log(setPostPicture);
     setFile(e.target.files[0]);
     setVideo("");
   };
