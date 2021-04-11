@@ -18,8 +18,18 @@ const FriendsHint = () => {
           return array.push(user._id);
       });
       array.sort(() => 0.5 - Math.random());
+      if (window.innerHeight > 780) {
+        array.length = 5;
+      } else if (window.innerHeight > 720) {
+        array.length = 4;
+      } else if (window.innerHeight > 615) {
+        array.length = 3;
+      } else if (window.innerHeight > 540) {
+        array.length = 1;
+      } else {
+        array.length = 0;
+      }
       setFriendsHint(array);
-      //console.log("array:", array);
     };
 
     if (playOnce && !isEmpty(usersData[0]) && !isEmpty(userData._id)) {
@@ -27,7 +37,7 @@ const FriendsHint = () => {
       setIsLoading(false);
       setPlayOnce(false);
     }
-  }, [usersData, usersData, playOnce]);
+  }, [usersData, userData, playOnce]);
 
   return (
     <div className="get-friends-container">
